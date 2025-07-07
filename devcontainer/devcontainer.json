@@ -1,0 +1,27 @@
+{
+    "name": "Python 3 & Playwright Desktop (Solución Definitiva)",
+    "image": "mcr.microsoft.com/devcontainers/python:3.10-bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1": {
+            "password": "codespace",
+            "webVnc": "true"
+        }
+    },
+
+    // ESTE ES EL CORAZÓN DE LA MAGIA: Todos los comandos para construir tu entorno perfecto.
+    "postCreateCommand": "sudo apt-get update && export DEBIAN_FRONTEND=noninteractive && sudo apt-get install -y python3-pip libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libgbm1 libasound2 libpangocairo-1.0-0 libxss1 libgtk-3-0 && pip install --no-cache-dir playwright requests google-generativeai && playwright install --with-deps chromium && sudo ln -s $(find /home/vscode/.cache/ms-playwright -type f -name 'chrome' | head -n 1) /usr/local/bin/chromium && mkdir -p /home/vscode/.local/share/applications && echo '[Desktop Entry]\\nName=Chromium Web Browser\\nExec=chromium --no-sandbox %U\\nIcon=chromium\\nType=Application\\nCategories=Network;WebBrowser;' > /home/vscode/.local/share/applications/chromium.desktop",
+
+    "forwardPorts": [6080],
+    "portsAttributes": {
+        "6080": {
+            "label": "Escritorio Virtual (VNC)"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    }
+}
